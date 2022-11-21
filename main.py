@@ -7,18 +7,14 @@ class Student:
         self.name = name
         self.year = year
         self.enrolledClasses = enrolledClasses
-
-    def __repr__(self):
-        return (f'Student({self.name})')
     
 #Get Student Info
     #Get Advisor
-    @classmethod
-    def getAdvisor(cls, stu):
+    def getAdvisor(cls):
         #Insert Student and advisor data. Must be entered individually 
         #in this version
-        advisorStuPairList = {"Student1":"Advisor1"}
-        return advisorStuPairList[str(stu)]
+        advisorStuPairList = {"Student1":"Advisor1", "bobert":"success:)"}
+        print(advisorStuPairList[cls.name])
 
 
 #NOTE: I am using dictionaries for most of my methods for quick 
@@ -32,14 +28,13 @@ class Student:
     #Placeholder fot a possible Declare Major Method?
     
     #Get Major
-    @classmethod
-    def getMajor(cls, stud):
+    def getMajor(cls):
         #Insert Student and Major Data here.
         #With a declare method, it could be possible to edit this list.
         #Would require this to become a static method
         #Might have to move the list to __init__
-        stuMajorPairList = {"Student1":"Major1"}
-        return stuMajorPairList[str(stud)]
+        stuMajorPairList = {"Student1":"Major1", "bobert":"getmayor is good"}
+        print(stuMajorPairList[cls.name])
     
     #Get Enrolled Classes
     #Might need to move these to __init__
@@ -48,17 +43,17 @@ class Student:
     #before student object initialization
     #and this would need to be a static method
     #I would move the if conditionals to the add drop methods though
-    @classmethod
-    def getEnrolledClassList(cls, stude, term):
+
+    def getEnrolledClassList(cls, term):
         if term == "Fall":
-            fallStuClassList = {"Stu1":"Classes1"}
-            return fallStuClassList[str(stude, term)]
+            fallStuClassList = {"Stu1":"Classes1","bobert":"fall is a go"}
+            print(fallStuClassList[str(cls.name)])
         elif term == "Winter":
             winterStuClassList = {"Stu1":"Classes1"}
-            return winterStuClassList[str(stude, term)]
+            print(winterStuClassList[str(cls.name)])
         elif term == "Spring":
             springStuClassList = {"Stu1":"Classes1"}
-            return springStuClassList[str(stude, term)]    
+            print(springStuClassList[str(cls.name)])    
 
 #Add drop functions are meant to edit list of enrolled courses
 #which was created at student object creation  
@@ -71,18 +66,18 @@ class Student:
 #Drop courses
     def dropCourse(self, classe):
         #classe is the class attempting to drop
-        self.enrolledClasses.remove(classe)        
+        self.enrolledClasses.remove(classe)
     
 
 #Courses
-class Courses(Student):
+class Courses:
     def __init__(self, cours):
-        self.name = cours
+        self.name = str(cours)
 
 #Get Offered courses
     @classmethod
     def getCurrentCourses(cls, year):
-        courseList = {"year":"Courses offered"}
+        courseList = {"year":"Courses offered", "2022":"Check the catalog"}
         return courseList[str(year)]
 
 #Get Course Requirements, Prereqs
@@ -93,73 +88,115 @@ class Courses(Student):
 
 
 #Classes
-class Classes:
+class Classes(Student):
     def __init__(self, name):
-        self.name = name
+        self.name = str(name)
 
 #Get Available term Classes  
-    @classmethod
-    def available(cls, term):
+    
+    def available(term):
         classList = {"term":"classes"}
-        return classList[str(term)]
+        print(classList[term])
 
 #Get Class capacity and seats filled
     @classmethod
     def classCap(cls, class4Cap):
         classListA = {"class":"student capacity and seats filled"}
-        return classListA[str(class4Cap)]
+        print(classListA[str(class4Cap)])
 
 #Get Class student list
     @classmethod
     def clasStu(cls, clas1):
         clasStu = {"Class":"Student roster"}
-        return clasStu[str(clas1)]
+        print(clasStu[str(clas1)])
 
 
 #Professors
-class Professors(Classes):
+class Professors(Classes, Student):
     def __init__(self, name, classT):
-        self.name = name
-        self.classT = classT
+        self.name = str(name)
+        self.classT = str(classT)
 
 #Get Professor's Advisee
     @classmethod
     def getAdvisee(cls, prof):
         adviProfPairList = {"Advisor1":"Students"}
-        return adviProfPairList[str(prof)]
+        print(adviProfPairList[str(prof)])
 
 #list of classes they currently teach
     @classmethod
     def classInstructed(cls, proff):
         profClassList = {"Professor1":"Classes Taught"}
-        return profClassList[str(proff)]
+        print(profClassList[str(proff)])
 
 
 #Get roster of a specific class
     @classmethod
     def getRoster(cls, profe):
         classListR = {"Professor1":"Students1"}
-        return classListR[str(profe)]
+        print(classListR[str(profe)])
 
 
 #Majors
 class Majors:
     def __init__(self, major1):
-        self.major = major1
+        self.major = str(major1)
 
 #Get Major Description
     @classmethod    
     def majorInfo(cls, major):
         mj = {"Course":"Course Descriptions"}
-        return mj[str(major)]
+        print(mj[str(major)])
     
 #Get Major Requirements
+#INSERT data from any school in the dictionary. 
     @classmethod
     def majorReqs(cls, major2):
-        reqList = {""}
-        return reqList[str(major2)]
+        reqList = {"major":"reqlist"}
+        print(reqList[str(major2)])
     
 
 def main():
     #EXAMPLES HERE
     print("hello world!")
+    
+    #Student Object Test
+    enrolledClasses1 = []
+    bob = Student("bobert", 2022, enrolledClasses1)
+    bob.getAdvisor()
+    bob.getMajor()
+    bob.getEnrolledClassList("Fall")
+    bob.addCourse("Bio")
+    print(enrolledClasses1)
+    bob.addCourse("potions")
+    print(enrolledClasses1)
+    bob.dropCourse("Bio")
+    print(enrolledClasses1)
+    
+    #Courses Object Test
+    Courses.getCurrentCourses(2022)
+    Courses.getCourseReqs("course1")
+    
+    #Classes Object Test
+    Classes.available("term")
+    Classes.classCap("class")
+    Classes.clasStu("Class")
+    
+    #Professors Object Test
+    Professors.getAdvisee("Advisor1")
+    Professors.classInstructed("Professor1")
+    Professors.getRoster("Professor1")
+    
+    #Majors Object Test
+    Majors.majorInfo("Course")
+    Majors.majorReqs("major")
+    
+    #Objects Succesful
+    #The next step in this project would be to use the inheritance I have set 
+    #up between these classes to have classes call eachother. For example, my getRoster method. 
+    #It would be set up to parse the student registered classes list to to see what students are registered for the professors classes.
+    #This could expand on the detail in each dictionary as well, as the courses lists could have what professor teaches it.
+    #This would make it a very dynamic set of classes that could be applied to any school and stay on top of all the changes that happen in them. 
+
+
+main()
