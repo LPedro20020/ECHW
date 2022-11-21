@@ -118,20 +118,28 @@ class Classes:
 
 #Professors
 class Professors(Classes):
-    def __init__(self, name):
+    def __init__(self, name, classT):
         self.name = name
+        self.classT = classT
 
 #Get Professor's Advisee
     @classmethod
-    def getAdvisee(cls, advi):
-        adviProfPairList = {"1":"Africana Studies", "2":"American Studies", "3":"Anthropology & Sociology"}
-        return adviProfPairList[str(advi)]
+    def getAdvisee(cls, prof):
+        adviProfPairList = {"Advisor1":"Students"}
+        return adviProfPairList[str(prof)]
+
+#list of classes they currently teach
+    @classmethod
+    def classInstructed(cls, proff):
+        profClassList = {"Professor1":"Classes Taught"}
+        return profClassList[str(proff)]
+
 
 #Get roster of a specific class
     @classmethod
-    def getRoster(cls, roster):
-        classListR = {"1":"Africana Studies", "2":"American Studies", "3":"Anthropology & Sociology"}
-        return classListR[str(roster)]
+    def getRoster(cls, profe):
+        classListR = {"Professor1":"Students1"}
+        return classListR[str(profe)]
 
 
 #Majors
@@ -142,12 +150,16 @@ class Majors:
 #Get Major Description
     @classmethod    
     def majorInfo(cls, major):
-        mj = {"1":"Africana Studies", "2":"American Studies", "3":"Anthropology & Sociology"}
+        mj = {"Course":"Course Descriptions"}
         return mj[str(major)]
     
 #Get Major Requirements
     @classmethod
     def majorReqs(cls, major2):
-        reqList = {"1":"Africana Studies", "2":"American Studies", "3":"Anthropology & Sociology"}
+        reqList = {""}
         return reqList[str(major2)]
     
+
+def main():
+    #EXAMPLES HERE
+    print("hello world!")
